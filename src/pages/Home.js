@@ -41,7 +41,7 @@ const Home = () => {
                 :
                 <>
                     <div className="mx-auto text-center">
-                        <button className="py-1 px-10 text-white text-xl bg-pink-600 rounded-full mt-3 mx-auto " onClick={newSearch}>Generar Nueva Consulta</button>
+                        <button className="py-1 px-10 text-white text-xl bg-pink-600 rounded-full mt-3 mx-auto " onClick={newSearch}>New search</button>
                     </div>
                     <div className="flex flex-row flex-wrap mt-10 justify-center mx-2">
                         {images.map(image => (

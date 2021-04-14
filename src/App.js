@@ -1,5 +1,7 @@
 import {
   BrowserRouter as Router,
+  Redirect,
+  Route,
   Switch
 } from "react-router-dom";
 import Home from "./pages/Home";
@@ -22,6 +24,9 @@ function App() {
           <PrivateRoute exact path='/' component={Home} />
           <PublicRoute exact path='/login' component={Login} />
           <PublicRoute exact path='/register' component={Register} />
+          <Route path="*">
+            <Redirect to="/login"/>
+          </Route>
         </Switch>
       </Router>
     </AppState>
