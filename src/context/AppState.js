@@ -98,7 +98,12 @@ const AppState = (props) => {
             dispatch({
                 type: OFF_LOADING
             })
-            arrayError.map(error => (toast.error(error.msg)))
+            if (arrayError.length > 0) {
+                arrayError.map(error => (toast.error(error.msg)))
+            }else{
+                toast.error(error.msg)
+            }
+
         }
     }
 
