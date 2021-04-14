@@ -132,7 +132,6 @@ const AppState = (props) => {
             })
         } catch (error) {
             toast.error(error.response.data.msg)
-            console.log(error.response)
 
         }
     }
@@ -164,12 +163,11 @@ const AppState = (props) => {
             
         } catch (error) {
             const arrayError = error.response.data
-            console.log(arrayError)
             dispatch({
                 type: OFF_LOADING
             })
-            if (arrayError.msg) {
-                arrayError.msg.map(error => (toast.error(error.msg)))
+            if (arrayError.errors) {
+                arrayError.errors.map(error => (toast.error(error.msg)))
             } else {
                 toast.error(arrayError.msg)
             }
