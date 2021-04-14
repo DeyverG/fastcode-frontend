@@ -66,7 +66,7 @@ const AppState = (props) => {
             })
         } catch (error) {
             logout()
-            console.log(error.response)
+            window.location.reload()
         }
     }
 
