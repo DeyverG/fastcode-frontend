@@ -7,6 +7,7 @@ import {
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import ResetPassword from "./pages/ResetPassword";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import AppState from "./context/AppState";
@@ -24,6 +25,7 @@ function App() {
           <PrivateRoute exact path='/' component={Home} />
           <PublicRoute exact path='/login' component={Login} />
           <PublicRoute exact path='/register' component={Register} />
+          <Route exact path="/resetpassword/:token" component={ResetPassword}/>
           <Route path="*">
             <Redirect to="/login"/>
           </Route>

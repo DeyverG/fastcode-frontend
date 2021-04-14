@@ -94,14 +94,14 @@ const AppState = (props) => {
             })
 
         } catch (error) {
-            const arrayError = error.response.data.errors
+            const arrayError = error.response.data
             dispatch({
                 type: OFF_LOADING
             })
-            if (arrayError.length > 0) {
-                arrayError.map(error => (toast.error(error.msg)))
-            }else{
-                toast.error(error.msg)
+            if (arrayError.errors) {
+                arrayError.errors.map(error => (toast.error(error.msg)))
+            } else {
+                toast.error(arrayError.msg)
             }
 
         }
@@ -144,6 +144,60 @@ const AppState = (props) => {
         })
     }
 
+    //Funcion para resetear la contraseña
+    const resetPassword = async (password, repeatPassword, token, fn) => {
+
+        const url = `${process.env.REACT_APP_URL_BACKEND}/auth/resetpass`
+        dispatch({
+            type: ON_LOADING
+        })
+        try {
+            const response = await axios.post(url, { password, repeatPassword, token });
+            toast.success(response.data.msg)
+            fn({ password: '', repeatPassword: '' })
+            dispatch({
+                type: OFF_LOADING
+            })
+            setTimeout(() => {
+                window.location.replace("http://localhost:3000/login");
+            }, 3000);
+            
+        } catch (error) {
+            const arrayError = error.response.data
+            console.log(arrayError)
+            dispatch({
+                type: OFF_LOADING
+            })
+            if (arrayError.msg) {
+                arrayError.msg.map(error => (toast.error(error.msg)))
+            } else {
+                toast.error(arrayError.msg)
+            }
+
+        }
+    }
+
+    //Funcion para enviar el correo de ResetPassword
+    const mailResetPass = async (email) => {
+
+        const url = `${process.env.REACT_APP_URL_BACKEND}/mail`
+        dispatch({
+            type: ON_LOADING
+        })
+        try {
+            const response = await axios.post(url, { email })
+            toast.success(response.data.msg)
+            dispatch({
+                type: OFF_LOADING
+            })
+        } catch (error) {
+            dispatch({
+                type: OFF_LOADING
+            })
+            toast.error(error.response.data.msg)
+        }
+    }
+
     return (
         <AppContext.Provider
             value={{
@@ -157,7 +211,9 @@ const AppState = (props) => {
                 logout,
                 register,
                 searchTag,
-                newSearch
+                newSearch,
+                resetPassword,
+                mailResetPass
             }}
         >
             {props.children}
