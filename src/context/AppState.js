@@ -65,6 +65,7 @@ const AppState = (props) => {
                 payload: response.data
             })
         } catch (error) {
+            logout()
             console.log(error.response)
         }
     }
