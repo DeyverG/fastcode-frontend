@@ -159,7 +159,7 @@ const AppState = (props) => {
                 type: OFF_LOADING
             })
             setTimeout(() => {
-                window.location.replace("http://localhost:3000/login");
+                window.location.replace(`${process.env.REACT_APP_FRONTEND_URL}`);
             }, 3000);
             
         } catch (error) {
